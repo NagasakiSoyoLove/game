@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+  --bg: #0b1020;
+  --panel: #1a2238;
+  --panel-2: #24304d;
+  --line: #8fb3ff;
+  --text: #f4f7ff;
+  --muted: #b7c3e0;
+  --accent: #42d9a0;
+  --warning: #ffd166;
+  --danger: #ff5d73;
+  --shadow: #05070d;
+  --tile: #162033;
+  --wall: #3b4f73;
+  --floor: #1a2740;
+  --exit: #3ddc97;
+  --key: #ffd54a;
+  --teacher: #ff6b6b;
+  --player: #7ee0ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.03), transparent 35%),
+    var(--bg);
+  color: var(--text);
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  image-rendering: pixelated;
+}
+
+body {
+  padding: 20px;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.pixel-page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pixel-title {
+  font-size: 24px;
+  line-height: 1.6;
+  margin: 0 0 24px;
+  color: var(--warning);
+  text-shadow: 3px 3px 0 var(--shadow);
+}
+
+.pixel-subtitle {
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.pixel-panel {
+  background: var(--panel);
+  border: 4px solid var(--line);
+  box-shadow: 8px 8px 0 var(--shadow);
+  padding: 16px;
+}
+
+.pixel-btn {
+  display: inline-block;
+  text-decoration: none;
+  border: 4px solid var(--line);
+  background: var(--panel-2);
+  color: var(--text);
+  padding: 12px 16px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--shadow);
+  transition: transform 0.08s ease;
+}
+
+.pixel-btn:hover {
+  transform: translate(-1px, -1px);
+}
+
+.pixel-btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 var(--shadow);
+}
+
+.pixel-badge {
+  display: inline-block;
+  padding: 6px 10px;
+  border: 3px solid var(--line);
+  background: var(--panel-2);
+  color: var(--accent);
+  font-size: 10px;
+}
+
+.pixel-danger {
+  color: var(--danger);
+}
+
+.pixel-warning {
+  color: var(--warning);
+}
+
+.pixel-accent {
+  color: var(--accent);
+}
+
+.global-volume {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 20;
+}
+
+.volume-toggle {
+  padding: 8px 10px;
+  font-size: 10px;
+}
+
+.volume-panel {
+  display: grid;
+  gap: 8px;
+  width: 260px;
+  margin-top: 10px;
+  font-size: 10px;
+}
+
+.volume-panel label {
+  color: var(--warning);
+  line-height: 1.6;
+}
+
+.volume-panel input[type='range'] {
+  width: 100%;
+  accent-color: var(--warning);
+}

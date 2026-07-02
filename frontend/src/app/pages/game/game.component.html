@@ -1,0 +1,91 @@
+<div class="pixel-page" *ngIf="loading">
+  <div class="pixel-panel">正在加载关卡...</div>
+</div>
+
+<div class="pixel-page" *ngIf="error">
+  <div class="pixel-panel pixel-danger">{{ error }}</div>
+</div>
+
+<div class="pixel-page game-page" *ngIf="level && !loading && !error">
+  <div class="sidebar">
+    <div class="pixel-panel">
+      <h2 class="hud-title">{{ level.name }}</h2>
+      <div class="selected-role" *ngIf="selectedRole">
+        <img class="selected-role-image" [src]="selectedRole.imageUrl" [alt]="selectedRole.name" />
+        <div>
+          <div class="hud-text">角色：{{ selectedRole.name }}</div>
+          <div class="hud-text">技能：{{ skillName() }}</div>
+        </div>
+      </div>
+      <div class="hud-text">坐标：({{ player.x }}, {{ player.y }})</div>
+      <div class="hud-text">钥匙：{{ hasKey ? '已获得' : '未获得' }}</div>
+      <div class="hud-text">文具：{{ inventory.length }} 件 / {{ lootValue() }} 分</div>
+      <div class="hud-text">技能冷却：{{ skillCooldown }} 秒</div>
+      <div class="hud-text" *ngIf="silentSteps > 0">无声步数：{{ silentSteps }}</div>
+      <div class="hud-text">目标：{{ objectiveText() }}</div>
+      <div class="hint-box" *ngIf="revealHint">{{ revealHint }}</div>
+    </div>
+
+    <div class="pixel-panel dialog-panel">
+      <div class="dialog-title">{{ dialogTitle }}</div>
+      <div class="dialog-text">{{ dialogText }}</div>
+    </div>
+
+    <div class="pixel-panel">
+      <div class="hud-title">背包</div>
+      <div class="hud-text" *ngIf="inventory.length === 0">还没有搜到文具</div>
+      <div class="loot-row" *ngFor="let item of inventory">
+        <span>{{ item.name }}</span>
+        <span>{{ item.value }} 分</span>
+      </div>
+    </div>
+
+    <div class="pixel-panel">
+      <div class="hud-title">操作说明</div>
+      <div class="hud-text">移动：W A S D / 方向键</div>
+      <div class="hud-text">搜索/对话：E</div>
+      <div class="hud-text">技能：Space</div>
+      <div class="hud-text">反制老师：F</div>
+    </div>
+
+    <div class="pixel-panel legend">
+      <div class="hud-title">图例</div>
+      <div class="legend-row"><span class="legend-box legend-player"></span><span>玩家</span></div>
+      <div class="legend-row"><span class="legend-box legend-wall"></span><span>墙壁</span></div>
+      <div class="legend-row"><span class="legend-box legend-chest"></span><span>宝箱</span></div>
+      <div class="legend-row"><span class="legend-box legend-key"></span><span>钥匙</span></div>
+      <div class="legend-row"><span class="legend-box legend-exit"></span><span>撤离点</span></div>
+      <div class="legend-row"><span class="legend-box legend-teacher"></span><span>老师</span></div>
+      <div class="legend-row"><span class="legend-box legend-npc"></span><span>可对话角色</span></div>
+    </div>
+  </div>
+
+  <div class="game-area">
+    <div class="pixel-panel game-topbar">
+      <span class="pixel-badge">搜打撤模式</span>
+      <span class="pixel-badge" *ngIf="hasKey">可撤离</span>
+      <span class="pixel-badge" *ngIf="!hasKey">寻找钥匙</span>
+      <button class="pixel-btn" (click)="useSkill()">使用技能</button>
+      <button class="pixel-btn" (click)="fightTeacher()">反制老师</button>
+      <button class="pixel-btn" (click)="restart()">重新开始</button>
+      <button class="pixel-btn" (click)="backToLobby()">返回大厅</button>
+    </div>
+
+    <div class="board-frame">
+      <div class="board" [style.grid-template-columns]="gridColumns()">
+        <div
+          class="cell"
+          *ngFor="let cell of cells()"
+          [class.wall]="tileType(cell.x, cell.y) === 'wall'"
+          [class.floor]="tileType(cell.x, cell.y) === 'floor'"
+          [class.player]="tileType(cell.x, cell.y) === 'player'"
+          [class.key]="tileType(cell.x, cell.y) === 'key'"
+          [class.exit]="tileType(cell.x, cell.y) === 'exit'"
+          [class.teacher]="tileType(cell.x, cell.y) === 'teacher'"
+          [class.npc]="tileType(cell.x, cell.y) === 'npc'"
+          [class.chest]="tileType(cell.x, cell.y) === 'chest'">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

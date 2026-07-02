@@ -1,0 +1,58 @@
+.start-page {
+  min-height: calc(100vh - 40px);
+  display: grid;
+  place-items: center;
+}
+
+.start-card {
+  width: min(900px, 100%);
+  text-align: center;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(66, 217, 160, 0.18), transparent 35%),
+    var(--panel);
+  border: 6px solid var(--line);
+  box-shadow: 12px 12px 0 var(--shadow);
+  padding: 56px 28px;
+}
+
+.school-logo {
+  display: block;
+  width: 170px;
+  height: 170px;
+  object-fit: cover;
+  border: 6px solid #e8f7ff;
+  border-radius: 50%;
+  box-shadow: 8px 8px 0 var(--shadow);
+  margin: 0 auto 24px;
+  background: #00506f;
+}
+
+.start-badge {
+  display: inline-block;
+  border: 3px solid var(--line);
+  background: var(--panel-2);
+  color: var(--accent);
+  padding: 8px 12px;
+  font-size: 10px;
+  margin-bottom: 28px;
+}
+
+.start-title {
+  margin: 0;
+  color: var(--warning);
+  font-size: clamp(36px, 8vw, 84px);
+  line-height: 1.35;
+  text-shadow: 6px 6px 0 var(--shadow);
+}
+
+.start-subtitle {
+  margin: 28px 0 34px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 2;
+}
+
+.start-btn {
+  font-size: 14px;
+  padding: 16px 24px;
+}

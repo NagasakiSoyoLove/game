@@ -1,0 +1,67 @@
+<div class="pixel-page roles-page">
+  <div class="pixel-panel">
+    <h1 class="pixel-title">逃离云梦一中</h1>
+    <div class="pixel-subtitle">
+      选择角色，躲避巡逻，拿到钥匙，逃离教学楼。
+    </div>
+    <span class="pixel-badge">角色选择</span>
+  </div>
+
+  <div class="pixel-panel" *ngIf="loading">
+    正在加载角色数据...
+  </div>
+
+  <div class="pixel-panel pixel-danger" *ngIf="error">
+    {{ error }}
+  </div>
+
+  <div class="roles-grid" *ngIf="!loading && !error">
+    <a class="role-card" *ngFor="let role of roles" routerLink="/game" (click)="choose(role)">
+      <div class="role-image-wrap">
+        <img class="role-image" [src]="role.imageUrl" [alt]="role.name" />
+      </div>
+
+      <h2 class="role-name">{{ role.name }}</h2>
+      <div class="role-skill">技能：{{ role.skill }}</div>
+
+      <div class="role-stats">
+        <div class="stat-row">
+          <span>体力</span>
+          <div class="stat-bar">
+            <div class="stat-fill" [style.width.%]="statWidth(role.hp)"></div>
+          </div>
+        </div>
+
+        <div class="stat-row">
+          <span>速度</span>
+          <div class="stat-bar">
+            <div class="stat-fill" [style.width.%]="statWidth(role.speed)"></div>
+          </div>
+        </div>
+
+        <div class="stat-row">
+          <span>潜行</span>
+          <div class="stat-bar">
+            <div class="stat-fill" [style.width.%]="statWidth(role.stealth)"></div>
+          </div>
+        </div>
+
+        <div class="stat-row">
+          <span>解谜</span>
+          <div class="stat-bar">
+            <div class="stat-fill" [style.width.%]="statWidth(role.puzzle)"></div>
+          </div>
+        </div>
+
+        <div class="stat-row">
+          <span>风险</span>
+          <div class="stat-bar">
+            <div class="stat-fill danger-fill" [style.width.%]="statWidth(role.risk)"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="role-tag">点击进入游戏</div>
+    </a>
+  </div>
+</div>
